@@ -1,0 +1,42 @@
+{
+  "name": "integreat-transporter-mqtt",
+  "version": "0.1.0",
+  "description": "MQTT transporter for Integreat",
+  "keywords": [
+    "integreat",
+    "mqtt",
+    "mqtts"
+  ],
+  "author": "Kjell-Morten Bratsberg Thorsen <kjellmorten@integreat.io> (https://integreat.io/)",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "npm run lint && npm run build && nyc --reporter=text-summary ava --config ./ava-dist.config.js",
+    "test:inspect": "node --inspect node_modules/ava/profile.js",
+    "test:watch": "npm run dev",
+    "dev": "ava --watch",
+    "build": "tsc",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "nyc:report": "nyc report --reporter=text --reporter=html",
+    "lint": "eslint --ext .ts src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/integreat-io/integreat-transporter-mqtt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/integreat-io/integreat-transporter-mqtt/issues"
+  },
+  "homepage": "https://github.com/integreat-io/integreat-transporter-mqtt#readme",
+  "engines": {
+    "node": ">= 14"
+  },
+  "dependencies": {
+    "@types/mqtt": "^2.5.0",
+    "mqtt": "^4.2.8"
+  },
+  "devDependencies": {
+    "@integreat/ts-dev-setup": "^2.0.2"
+  }
+}
