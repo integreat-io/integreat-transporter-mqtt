@@ -19,7 +19,7 @@ const setAuthentication = (
 
 export default (mqtt: MQTT) =>
   async function (
-    { uri, topic, serviceId }: EndpointOptions,
+    { uri, topic }: EndpointOptions,
     authentication: Record<string, unknown> | null,
     connection: Connection | null
   ): Promise<Connection | null> {
@@ -28,5 +28,5 @@ export default (mqtt: MQTT) =>
     }
     const options = authentication ? setAuthentication({}, authentication) : {}
     const client = mqtt.connect(uri, options)
-    return { status: 'ok', client, topic, serviceId }
+    return { status: 'ok', client, topic }
   }

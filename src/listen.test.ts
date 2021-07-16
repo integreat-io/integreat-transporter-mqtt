@@ -56,14 +56,12 @@ test('should dispatch JSON message', async (t) => {
     status: 'ok',
     client,
     topic: 'test/receive',
-    serviceId: 'mqttStream',
   }
   const expectedAction = {
     type: 'SET',
     payload: {
       data: message,
       params: { topic: 'test/receive' },
-      sourceService: 'mqttStream',
     },
     meta: {},
   }
@@ -92,14 +90,12 @@ test('should dispatch non-JSON message as string', async (t) => {
     status: 'ok',
     client,
     topic: 'test/receive',
-    serviceId: 'mqttStream',
   }
   const expectedAction = {
     type: 'SET',
     payload: {
       data: message,
       params: { topic: 'test/receive' },
-      sourceService: 'mqttStream',
     },
     meta: {},
   }

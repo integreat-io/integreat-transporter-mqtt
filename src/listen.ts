@@ -4,7 +4,7 @@ export default async function listen(
   dispatch: Dispatch,
   connection: Connection | null
 ): Promise<Response> {
-  const { client, topic, serviceId } = connection || {}
+  const { client, topic } = connection || {}
 
   if (!client) {
     return {
@@ -27,7 +27,7 @@ export default async function listen(
     } catch (err) {}
     const action = {
       type: 'SET',
-      payload: { data, params: { topic }, sourceService: serviceId },
+      payload: { data, params: { topic } },
       meta: {},
     }
     dispatch(action)

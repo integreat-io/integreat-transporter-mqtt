@@ -26,13 +26,11 @@ test('should connect to mqtt broker', async (t) => {
   const options = {
     uri: 'mqtt://localhost:1884',
     topic: 'test/receive',
-    serviceId: 'mqttStream',
   }
   const expectedConn = {
     status: 'ok',
     client,
     topic: 'test/receive',
-    serviceId: 'mqttStream',
   }
   const expectedUri = 'mqtt://localhost:1884'
   const expectedOptions = {}
@@ -52,7 +50,6 @@ test('should connect to mqtt broker with authentication', async (t) => {
   const options = {
     uri: 'mqtt://localhost:1884',
     topic: 'test/receive',
-    serviceId: 'mqttStream',
   }
   const authentication = {
     key: 'svein',
@@ -62,7 +59,6 @@ test('should connect to mqtt broker with authentication', async (t) => {
     status: 'ok',
     client,
     topic: 'test/receive',
-    serviceId: 'mqttStream',
   }
   const expectedUri = 'mqtt://localhost:1884'
   const expectedOptions = {
@@ -85,7 +81,6 @@ test('should not include key without secret', async (t) => {
   const options = {
     uri: 'mqtt://localhost:1884',
     topic: 'test/receive',
-    serviceId: 'mqttStream',
   }
   const authentication = {
     key: 'svein',
@@ -94,7 +89,6 @@ test('should not include key without secret', async (t) => {
     status: 'ok',
     client,
     topic: 'test/receive',
-    serviceId: 'mqttStream',
   }
   const expectedOptions = {}
 
@@ -128,14 +122,12 @@ test('should reconnect if not connected', async (t) => {
   const options = {
     uri: 'mqtt://localhost:1884',
     topic: 'test/receive',
-    serviceId: 'mqttStream',
   }
   const connection = { status: 'ok', client: clientDisconnected }
   const expectedConn = {
     status: 'ok',
     client,
     topic: 'test/receive',
-    serviceId: 'mqttStream',
   }
 
   const conn = await connect(mockMqtt)(options, null, connection)
@@ -151,14 +143,12 @@ test('should connect if given connection has an error', async (t) => {
   const options = {
     uri: 'mqtt://localhost:1884',
     topic: 'test/receive',
-    serviceId: 'mqttStream',
   }
   const connection = { status: 'error', error: 'Something is amiss', client }
   const expectedConn = {
     status: 'ok',
     client,
     topic: 'test/receive',
-    serviceId: 'mqttStream',
   }
 
   const conn = await connect(mockMqtt)(options, null, connection)

@@ -18,21 +18,16 @@ test('should have authentication string', (t) => {
 
 // Tests -- prepareOptions
 
-test('should return options object with sourceService', (t) => {
+test('should return options object as is', (t) => {
   const options = {
     uri: 'http://example.com/',
     topic: 'test/message',
   }
   const serviceId = 'mqttStream'
-  const expected = {
-    uri: 'http://example.com/',
-    topic: 'test/message',
-    serviceId: 'mqttStream',
-  }
 
   const ret = transporter.prepareOptions(options, serviceId)
 
-  t.deepEqual(ret, expected)
+  t.deepEqual(ret, options)
 })
 
 // Tests -- send

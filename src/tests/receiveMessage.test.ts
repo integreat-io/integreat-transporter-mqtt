@@ -47,7 +47,6 @@ test('should subscribe and receive message and unsubscribe', async (t) => {
     payload: {
       data: message,
       params: { topic: 'receive' },
-      sourceService: 'mqttStream',
     },
     meta: {},
   }

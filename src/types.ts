@@ -3,7 +3,6 @@ import { MqttClient } from 'mqtt'
 export interface EndpointOptions extends Record<string, unknown> {
   uri?: string
   topic?: string | string[]
-  serviceId?: string
 }
 
 export interface Ident {
@@ -81,7 +80,6 @@ export interface Connection extends Record<string, unknown> {
   status: string
   client?: MqttClient
   topic?: string | string[]
-  serviceId?: string
 }
 
 export interface Transporter {

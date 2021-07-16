@@ -10,10 +10,7 @@ import { EndpointOptions, Transporter } from './types'
 const mqttTransporter: Transporter = {
   authentication: 'asObject',
 
-  prepareOptions: (options: EndpointOptions, serviceId: string) => ({
-    ...options,
-    serviceId,
-  }),
+  prepareOptions: (options: EndpointOptions, _serviceId: string) => options,
 
   connect: connect(mqtt),
 
