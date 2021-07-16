@@ -37,6 +37,10 @@
     "mqtt": "^4.2.8"
   },
   "devDependencies": {
-    "@integreat/ts-dev-setup": "^2.0.2"
+    "@integreat/ts-dev-setup": "^2.0.2",
+    "@types/node": "^16.3.2",
+    "@types/sinon": "^10.0.2",
+    "aedes": "^0.46.0",
+    "sinon": "^11.1.1"
   }
 }
