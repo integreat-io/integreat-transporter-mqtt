@@ -27,6 +27,11 @@ export default (mqtt: MQTT) =>
       return connection
     }
     const options = authentication ? setAuthentication({}, authentication) : {}
+
     const client = mqtt.connect(uri, options)
+    client.on('error', function (error) {
+      throw new Error(`Error from MQTT broker on '${uri}'. ${error}`)
+    })
+
     return { status: 'ok', client, topic }
   }

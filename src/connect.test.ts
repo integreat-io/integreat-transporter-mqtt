@@ -136,7 +136,7 @@ test('should reconnect if not connected', async (t) => {
   t.is(mockMqtt.connect.callCount, 1)
 })
 
-test('should connect if given connection has an error', async (t) => {
+test('should make new connection if given connection has an error', async (t) => {
   const mockMqtt = {
     connect: sinon.stub().returns(client),
   }
@@ -155,6 +155,60 @@ test('should connect if given connection has an error', async (t) => {
 
   t.deepEqual(conn, expectedConn)
   t.is(mockMqtt.connect.callCount, 1)
+})
+
+test('should listen to errors from broker', async (t) => {
+  const onStub = sinon.stub().returns({})
+  const client = {
+    on: onStub,
+    subscribe: () => ({}),
+    connected: true,
+  } as unknown as MqttClient
+  const mockMqtt = {
+    connect: sinon.stub().returns(client),
+  }
+  const options = {
+    uri: 'mqtt://localhost:1884',
+    topic: 'test/receive',
+  }
+  const expectedConn = {
+    status: 'ok',
+    client,
+    topic: 'test/receive',
+  }
+
+  const conn = await connect(mockMqtt)(options, null, null)
+
+  t.is(onStub.callCount, 1)
+  t.is(onStub.args[0][0], 'error')
+  t.is(typeof onStub.args[0][1], 'function')
+  t.deepEqual(conn, expectedConn)
+})
+
+test('should throw on error from broker', async (t) => {
+  const onStub = sinon.stub().returns({})
+  const client = {
+    on: onStub,
+    subscribe: () => ({}),
+    connected: true,
+  } as unknown as MqttClient
+  const mockMqtt = {
+    connect: sinon.stub().returns(client),
+  }
+  const options = {
+    uri: 'mqtt://localhost:1884',
+    topic: 'test/receive',
+  }
+  const expectedError = new Error(
+    "Error from MQTT broker on 'mqtt://localhost:1884'. Error: Oh no!"
+  )
+
+  await connect(mockMqtt)(options, null, null)
+  const onError = onStub.args[0][1]
+
+  t.is(typeof onError, 'function')
+  const err = t.throws(() => onError(new Error('Oh no!')))
+  t.deepEqual(err, expectedError)
 })
 
 test.todo('should connect with auth')
