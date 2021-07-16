@@ -8,7 +8,7 @@ const mqttTransporter = require('integreat-transport-mqtt')
 const defs = require('./config')
 
 const resources = integreat.mergeResources(integreat.resources(), {
-  transporters: { mqtt: mqttTransporter() },
+  transporters: { mqtt: mqttTransporter },
 })
 const great = integreat(defs, resources)
 
@@ -21,8 +21,8 @@ const great = integreat(defs, resources)
   transporter: 'mqtt',
   options: {
     uri: 'mqtts://somemqtt.io',
-    username: 'svein',
-    password: 's3cr3t',
+    key: 'svein',
+    secret: 's3cr3t',
     topic: 'mqtt/demo'
   }
 }
