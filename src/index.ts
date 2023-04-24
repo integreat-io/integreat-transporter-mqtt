@@ -2,7 +2,8 @@ import mqtt from 'mqtt'
 import connect from './connect.js'
 import listen from './listen.js'
 import disconnect from './disconnect.js'
-import type { EndpointOptions, Transporter } from './types.js'
+import type { Transporter } from 'integreat'
+import type { EndpointOptions } from './types.js'
 
 /**
  * MQTT Transporter for Integreat

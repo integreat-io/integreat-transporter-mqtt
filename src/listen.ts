@@ -1,4 +1,5 @@
-import type { Connection, Dispatch, Response } from './types.js'
+import type { Dispatch, Response } from 'integreat'
+import type { Connection } from './types.js'
 
 export default async function listen(
   dispatch: Dispatch,

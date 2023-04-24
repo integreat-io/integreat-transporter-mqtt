@@ -6,7 +6,7 @@ import listen from './listen.js'
 
 // Setup
 
-const dispatch = async () => ({ status: 'ok', data: [] })
+const dispatch = sinon.stub().resolves({ status: 'ok', data: [] })
 
 // Tests
 

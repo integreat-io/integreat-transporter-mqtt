@@ -60,7 +60,12 @@ test('should subscribe and receive message and unsubscribe', async (t) => {
   const client = mqtt.connect('mqtt://localhost:1884')
 
   const preparedOptions = transporter.prepareOptions(options, serviceId)
-  const conn = await transporter.connect(preparedOptions, null, null)
+  const conn = await transporter.connect(
+    preparedOptions,
+    null,
+    null,
+    () => undefined
+  )
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const ret = await transporter.listen!(dispatch, conn)
   await publishToClient(client, message)
