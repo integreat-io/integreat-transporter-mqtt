@@ -1,8 +1,8 @@
 import test from 'ava'
-import sinon = require('sinon')
-import { MqttClient } from 'mqtt'
+import sinon from 'sinon'
+import type { MqttClient } from 'mqtt'
 
-import connect from './connect'
+import connect from './connect.js'
 
 // Setup
 
@@ -209,6 +209,25 @@ test('should throw on error from broker', async (t) => {
   t.is(typeof onError, 'function')
   const err = t.throws(() => onError(new Error('Oh no!')))
   t.deepEqual(err, expectedError)
+})
+
+test('should return error when connecting without an uri', async (t) => {
+  const mockMqtt = {
+    connect: sinon.stub().returns(client),
+  }
+  const options = {
+    uri: undefined, // No uri
+    topic: 'test/receive',
+  }
+  const expectedConn = {
+    status: 'badrequest',
+    error: 'Trying to connect without an uri',
+  }
+
+  const conn = await connect(mockMqtt)(options, null, null)
+
+  t.deepEqual(conn, expectedConn)
+  t.is(mockMqtt.connect.callCount, 0)
 })
 
 test.todo('should connect with auth')

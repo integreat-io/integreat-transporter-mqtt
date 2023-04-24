@@ -1,26 +1,24 @@
-import ava, { TestInterface } from 'ava'
-import sinon = require('sinon')
-import net = require('net')
-import aedes = require('aedes')
-import mqtt = require('mqtt')
+import ava, { TestFn } from 'ava'
+import sinon from 'sinon'
+import net from 'net'
+import Aedes from 'aedes'
+import mqtt from 'mqtt'
 
-import transporter from '..'
+import transporter from '../index.js'
 
 // Setup
 
 const PORT = 1884
 
-const test = ava as TestInterface<{ server: net.Server }>
+const test = ava as TestFn<{ server: net.Server }>
 
-test.before.cb((t) => {
-  t.context.server = net.createServer(
-    (aedes as unknown as () => aedes.Aedes)().handle
-  )
-  t.context.server.listen(PORT, t.end)
+test.before((t) => {
+  t.context.server = net.createServer(new Aedes().handle)
+  t.context.server.listen(PORT)
 })
 
-test.after.always.cb((t) => {
-  t.context.server?.close(t.end)
+test.after.always((t) => {
+  t.context.server?.close()
 })
 
 async function publishToClient(

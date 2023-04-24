@@ -1,4 +1,4 @@
-import { MqttClient } from 'mqtt'
+import type { MqttClient } from 'mqtt'
 
 export interface EndpointOptions extends Record<string, unknown> {
   uri?: string

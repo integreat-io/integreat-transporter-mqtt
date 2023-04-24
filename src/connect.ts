@@ -1,8 +1,8 @@
-import { MqttClient, IClientOptions } from 'mqtt'
-import { Connection, EndpointOptions } from './types'
+import type { MqttClient, IClientOptions } from 'mqtt'
+import type { Connection, EndpointOptions } from './types.js'
 
 export interface MQTT {
-  connect: (brokerUrl?: string, opts?: IClientOptions | undefined) => MqttClient
+  connect: (brokerUrl: string, opts?: IClientOptions) => MqttClient
 }
 
 const setAuthentication = (
@@ -26,6 +26,11 @@ export default (mqtt: MQTT) =>
     if (connection?.status === 'ok' && connection.client?.connected) {
       return connection
     }
+
+    if (typeof uri !== 'string' || !uri) {
+      return { status: 'badrequest', error: 'Trying to connect without an uri' }
+    }
+
     const options = authentication ? setAuthentication({}, authentication) : {}
 
     const client = mqtt.connect(uri, options)

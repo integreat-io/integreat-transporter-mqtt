@@ -1,8 +1,8 @@
 import test from 'ava'
-import sinon = require('sinon')
-import { MqttClient } from 'mqtt'
+import sinon from 'sinon'
+import type { MqttClient } from 'mqtt'
 
-import disconnect from './disconnect'
+import disconnect from './disconnect.js'
 
 // Tests
 

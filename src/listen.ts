@@ -1,4 +1,4 @@
-import { Connection, Dispatch, Response } from './types'
+import type { Connection, Dispatch, Response } from './types.js'
 
 export default async function listen(
   dispatch: Dispatch,
