@@ -44,7 +44,7 @@ test('should subscribe and receive message and unsubscribe', async (t) => {
     type: 'SET',
     payload: {
       data: message,
-      params: { topic: 'receive' },
+      topic: 'receive',
     },
     meta: {},
   }

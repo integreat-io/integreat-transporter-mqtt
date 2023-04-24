@@ -27,7 +27,7 @@ export default async function listen(
     } catch (err) {}
     const action = {
       type: 'SET',
-      payload: { data, params: { topic } },
+      payload: { data, topic },
       meta: {},
     }
     dispatch(action)

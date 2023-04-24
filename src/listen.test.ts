@@ -61,7 +61,7 @@ test('should dispatch JSON message', async (t) => {
     type: 'SET',
     payload: {
       data: message,
-      params: { topic: 'test/receive' },
+      topic: 'test/receive',
     },
     meta: {},
   }
@@ -95,7 +95,7 @@ test('should dispatch non-JSON message as string', async (t) => {
     type: 'SET',
     payload: {
       data: message,
-      params: { topic: 'test/receive' },
+      topic: 'test/receive',
     },
     meta: {},
   }
