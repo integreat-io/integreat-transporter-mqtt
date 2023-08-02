@@ -4,7 +4,7 @@
 
 ### Prerequisits
 
-Requires node v18 and Integreat v0.8.
+Requires node v18 and Integreat v1.0.
 
 ### Installing and using
 
