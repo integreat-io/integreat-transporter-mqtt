@@ -1,7 +1,7 @@
 name: 'Version'
 
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       version-range:
         description: 'Semantic Version Range'
