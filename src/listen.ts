@@ -1,9 +1,10 @@
-import type { Dispatch, Response } from 'integreat'
+import type { Dispatch, Action, Response, Authentication } from 'integreat'
 import type { Connection } from './types.js'
 
 export default async function listen(
   dispatch: Dispatch,
-  connection: Connection | null
+  connection: Connection | null,
+  authenticate: (authentication: Authentication, action?: Action | null) => Promise<Response>
 ): Promise<Response> {
   const { client, topic } = connection || {}
 
@@ -20,18 +21,22 @@ export default async function listen(
     }
   }
 
-  client.on('message', function (topic, message) {
+  client.on('message', async function (topic, message) {
     let data = message.toString()
     try {
       // message is Buffer
       data = JSON.parse(data)
-    } catch (err) {}
+    } catch (err) { }
     const action = {
       type: 'SET',
       payload: { data, topic },
       meta: {},
     }
-    dispatch(action)
+    const authResponse = await authenticate({ status: 'granted' }, action)
+    const ident = authResponse.access?.ident
+    if (authResponse.status === 'ok' && ident) {
+      dispatch({ ...action, meta: { ident } })
+    }
   })
 
   return new Promise((resolve) => {

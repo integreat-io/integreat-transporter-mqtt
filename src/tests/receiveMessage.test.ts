@@ -8,7 +8,7 @@ import transporter from '../index.js'
 
 // Setup
 
-const PORT = 1884
+const PORT = 1885
 
 const test = ava as TestFn<{ server: net.Server }>
 
@@ -36,6 +36,8 @@ async function publishToClient(
   })
 }
 
+const authenticate = async () => ({ status: 'ok', access: { ident: { id: 'userFromIntegreat' } } })
+
 // Tests
 
 test('should subscribe and receive message and unsubscribe', async (t) => {
@@ -46,18 +48,18 @@ test('should subscribe and receive message and unsubscribe', async (t) => {
       data: message,
       topic: 'receive',
     },
-    meta: {},
+    meta: { ident: { id: 'userFromIntegreat' } }
   }
   const dispatch = sinon.stub().resolves({
     ...expectedAction,
     response: { status: 'ok' },
   })
   const options = {
-    uri: 'mqtt://localhost:1884',
+    uri: 'mqtt://localhost:1885',
     topic: 'receive',
   }
   const serviceId = 'mqttStream'
-  const client = mqtt.connect('mqtt://localhost:1884')
+  const client = mqtt.connect('mqtt://localhost:1885')
 
   const preparedOptions = transporter.prepareOptions(options, serviceId)
   const conn = await transporter.connect(
@@ -67,7 +69,7 @@ test('should subscribe and receive message and unsubscribe', async (t) => {
     () => undefined
   )
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const ret = await transporter.listen!(dispatch, conn)
+  const ret = await transporter.listen!(dispatch, conn, authenticate)
   await publishToClient(client, message)
   await new Promise((resolve) => setTimeout(resolve, 100, undefined))
 
