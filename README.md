@@ -35,10 +35,12 @@ Example service configuration:
   id: 'store',
   transporter: 'mqtt',
   options: {
-    uri: 'mqtts://somemqtt.io',
-    key: 'svein',
-    secret: 's3cr3t',
-    topic: 'mqtt/demo'
+    transporter: {
+      uri: 'mqtts://somemqtt.io',
+      key: 'svein',
+      secret: 's3cr3t',
+      topic: 'mqtt/demo'
+    }
   }
 }
 ```
