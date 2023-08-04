@@ -45,7 +45,7 @@
     "@types/node": "^18.17.2",
     "@types/sinon": "^10.0.16",
     "aedes": "^0.50.0",
-    "integreat": "^1.0.0-rc.0",
+    "integreat": "^1.0.0",
     "sinon": "^15.2.0"
   }
 }
