@@ -1,5 +1,12 @@
 # MQTT transporter for Integreat
 
+Transporter that lets
+[Integreat](https://github.com/integreat-io/integreat) access listen to a MQTT
+queue.
+
+[![npm Version](https://img.shields.io/npm/v/integreat-transporter-mqtt.svg)](https://www.npmjs.com/package/integreat-transporter-mqtt)
+[![Maintainability](https://api.codeclimate.com/v1/badges/a99b1d48267edb699c49/maintainability)](https://codeclimate.com/github/integreat-io/integreat-transporter-mqtt/maintainability)
+
 ## Getting started
 
 ### Prerequisits
