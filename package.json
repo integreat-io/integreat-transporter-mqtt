@@ -38,11 +38,11 @@
     "node": ">= 18"
   },
   "dependencies": {
-    "mqtt": "^5.0.1"
+    "mqtt": "^5.0.2"
   },
   "devDependencies": {
     "@integreat/ts-dev-setup": "^4.1.1",
-    "@types/node": "^18.17.1",
+    "@types/node": "^18.17.2",
     "@types/sinon": "^10.0.16",
     "aedes": "^0.50.0",
     "integreat": "^1.0.0-rc.0",
